@@ -10,6 +10,8 @@ fastapi = "^0.77.1"
 uvicorn = "^0.17.6"
 requests = "^2.27.1"
 pandas = "^1.4.2"
+config = "^0.5.1"
+decouple = "^0.0.7"
 
 [tool.poetry.dev-dependencies]
 
