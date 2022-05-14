@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "whatsapp_fcsa_api_swagger"
+version = "0.1.0"
+description = ""
+authors = ["dee <dee@opencitieslab.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.77.1"
+uvicorn = "^0.17.6"
+requests = "^2.27.1"
+pandas = "^1.4.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
