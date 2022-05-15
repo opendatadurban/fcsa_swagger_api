@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 import requests
 import pandas as pd
 import json
@@ -22,20 +22,20 @@ headers = {"X-Session": "", "X-Service": "3A8369E159041EEAADDEA975879D9E5E", "X-
 cookies = dict(MYSAPSSO2="AjQxMDIBABgARwBVAEUAUwBUAF8AVwBTAFIAXwBXACACAAYAMAA1ADADABAARQBBAFEAIAAgACAAIAAgBAAYADIAMAAyADEAMAA2ADIAMwAxADMAMAAzBwAEAAAAAggAAQEJAAIARQ8AAzA1MBAACEVBUSAgICAg%2fwD7MIH4BgkqhkiG9w0BBwKggeowgecCAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGBxzCBxAIBATAZMA4xDDAKBgNVBAMTA0VBUAIHIAkSCARHBDAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjIzMTMwMzQwWjAjBgkqhkiG9w0BCQQxFgQU6x1Qj%2fiNYbJq2hUnXzNy9tz4SvkwCQYHKoZIzjgEAwQvMC0CFQCmNWDd3obPqnu%2fB%2f3Moo9y4ryzvwIUelZwlIJmGegVC0pYGTFpN6bBJCU%3d")
 
 @router.get('/', tags=["check_status"])
-async def get_sap_cookie():
+async def get_sap_cookie( request: Request):
     r = requests.get('https://qaeservices1.capetown.gov.za/coct/api/zcur-guest/login',headers=headers)
     print(r)
     print(r.headers)
     data_output = json.loads(r.content)
     print(data_output)
     return r
-
-def getSessionID(new_SAP):
-    cookies = dict(MYSAPSSO2=new_SAP)
-    r = requests.get('https://qaeservices1.capetown.gov.za/coct/api/zsreq/session',headers=headers,cookies=cookies)
-    print(r)
-    print(r.headers)
-    data_output = json.loads(r.content)
-    print(data_output)
-    return r
-
+#
+# def getSessionID(new_SAP):
+#     cookies = dict(MYSAPSSO2=new_SAP)
+#     r = requests.get('https://qaeservices1.capetown.gov.za/coct/api/zsreq/session',headers=headers,cookies=cookies)
+#     print(r)
+#     print(r.headers)
+#     data_output = json.loads(r.content)
+#     print(data_output)
+#     return r
+#
