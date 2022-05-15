@@ -4,7 +4,7 @@ import uvicorn
 
 from api.api import ApiRouter
 
-app = FastAPI(title='cct-api', version=1.0, description="Well done",)
+app = FastAPI(title='cct-api', version=1.0, description="Well done, we about to connect to whatsapp",)
 app.include_router(ApiRouter,tags=['Api'])
 
 '''
