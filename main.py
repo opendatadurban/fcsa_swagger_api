@@ -1,13 +1,16 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+import uvicorn
 
-app = FastAPI()
+from api.api import ApiRouter
+
+app = FastAPI(title='cct-api', version=1.0, description="Well done, we about to connect to whatsapp",)
+app.include_router(ApiRouter,tags=['Api'])
+
+'''
+    creating 
+'''
+if __name__ == '__main__':
+    uvicorn.run(app, host='127.0.0.1', port=8000, debug=True)
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
