@@ -8,6 +8,6 @@ def test_api_check_status():
     response = client.get("/status_checker")
     assert response.status_code == 200
 
-
-
-
+def test_get_session_id(new_sap):
+    response = client.get("/session-id")
+    assert response.status_code == 200

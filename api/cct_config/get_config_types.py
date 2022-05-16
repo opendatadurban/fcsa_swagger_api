@@ -1,12 +1,7 @@
 import requests
 from fastapi.responses import HTMLResponse
-
 from fastapi import APIRouter, Request
-import pandas as pd
 import json
-import hashlib
-import hmac
-import base64
 
 from api.status_checker.api_check_status import server_cct, SRRESTPath, private_key, public_key, MYSAPSSO2
 
@@ -15,10 +10,14 @@ cookies = dict(MYSAPSSO2=MYSAPSSO2)
 
 config_types_router = APIRouter()
 
-@config_types_router.get('/', response_class=HTMLResponse)
-def get_config_types():
-    r = requests.get('https://%s/%s%s'% (server_cct,SRRESTPath,'/config/types'), headers=headers,cookies=cookies)
-    print(r)
-    print(r.headers)
-    data_output = json.loads(r.content)
-    print(data_output)
+
+@config_types_router.get('/config-types', response_class=HTMLResponse)
+def get_config_types(request: Request):
+    _req = requests.get(f'https://{server_cct}/{SRRESTPath}/config/types', headers=headers, cookies=cookies)
+    if _req == 200:
+        data_output = json.loads(_req.content)
+        return {
+            'data': data_output
+        }
+    else:
+        print("bad connection error")

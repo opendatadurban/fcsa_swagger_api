@@ -41,23 +41,30 @@ cookies = dict(MYSAPSSO2=MYSAPSSO2)
 templates = Jinja2Templates(directory="templates")
 
 
+
 @check_status_router.get('/', response_class=HTMLResponse)
 async def index(request: Request):
     _req = requests.get('https://qaeservices1.capetown.gov.za/coct/api/zcur-guest/login', headers=headers)
     if _req.status_code == 200:
         data_output = json.loads(_req.content)
-        print(data_output)
+        return {
+            'data': data_output,
+            'request': request,
+        }
     return templates.TemplateResponse("index.html", {"request": request})
 
 
 @check_status_router.get('/session-id', response_class=HTMLResponse)
-async def get_session_id(new_sap):
-
+async def get_session_id(new_sap, request: Request):
     cookies = dict(MYSAPSSO2=new_sap)
     _req = requests.get('https://qaeservices1.capetown.gov.za/coct/api/zsreq/session',headers=headers,cookies=cookies)
     if _req.status_code == 200:
         data_output = json.loads(_req.content)
-        print(data_output)
+
+        return {
+            'request': request,
+            'data': data_output
+        }
     else:
         print("bad connection error")
 
