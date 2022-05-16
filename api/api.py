@@ -7,3 +7,4 @@ ApiRouter = APIRouter()
     include all routes
 '''
 ApiRouter.include_router(check_status_router,prefix='/status')
+ApiRouter.include_router(check_status_router,prefix='/status')
